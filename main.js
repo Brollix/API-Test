@@ -1,3 +1,5 @@
+let api_key = '23e5c3a9a64c8efd5db1881b5e59251b';
+
 let city_name = 'Buenos+Aires';
 const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city_name}&units=metric&appid=${api_key}`;
 
