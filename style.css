@@ -1,9 +1,26 @@
 body {
 	background-color: black;
-    color:white
+	color: black;
 }
 
-#tabla{
-    margin:auto;
-    text-align: center;
+#tabla {
+	background-color: rgb(255, 188, 107);
+
+	margin: auto;
+	text-align: center;
+}
+
+.dia {
+	text-align: center;
+}
+
+.temp {
+	text-align: center;
+}
+
+table,
+th,
+td {
+	border: 5px solid black;
+	border-collapse: collapse;
 }

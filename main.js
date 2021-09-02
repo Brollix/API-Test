@@ -1,36 +1,44 @@
 let api_key = '23e5c3a9a64c8efd5db1881b5e59251b';
-
-let city_name = 'Buenos+Aires';
-const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city_name}&units=metric&appid=${api_key}`;
-
+let lat, lon;
 let periods = [];
+
+let url = `http://127.0.0.1:5500/api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${api_key}`;
 
 const tabla = document.getElementById('tabla');
 
-get_temperature(url);
+if ('geolocation' in navigator) {
+	navigator.geolocation.getCurrentPosition((position) => {
+		lat = position.coords.latitude;
+		lon = position.coords.longitude;
 
-async function get_temperature(url) {
-	const response = await fetch(url);
-	const data = await response.json();
+		get_temperature(url);
 
-	for (let period of data.list) {
-		periods.push(period);
-	}
-	for (let i = 0; i < periods.length; i++) {
-		// console.log(new Date(periods[i].dt * 1000));
-		// console.log(periods[i].main.temp);
-		let div_info = document.createElement('tr')
-		div_info.className = 'info'
+		async function get_temperature(url) {
+			const response = await fetch(url);
+			const data = await response.json();
 
-		let dia = document.createElement('td')
-		dia.innerHTML = new Date(periods[i].dt * 1000);
+			console.log(lat, lon);
 
-		let temperatura = document.createElement('td')
-		temperatura.innerHTML = periods[i].main.temp + ' °C'
+			for (let period of data.list) {
+				periods.push(period);
+			}
+			for (let i = 0; i < periods.length; i++) {
+				let div_info = document.createElement('tr');
+				div_info.className = 'info';
 
-		div_info.appendChild(dia)
-		div_info.appendChild(temperatura)
+				let dia = document.createElement('td');
+				dia.className = 'dia';
+				dia.innerHTML = new Date(periods[i].dt * 1000);
 
-		tabla.appendChild(div_info)
-	}
-}
+				let temperatura = document.createElement('td');
+				temperatura.className = 'temp';
+				temperatura.innerHTML = periods[i].main.temp + ' °C';
+
+				div_info.appendChild(dia);
+				div_info.appendChild(temperatura);
+
+				tabla.appendChild(div_info);
+			}
+		}
+	});
+} else console.error('Location not available');
