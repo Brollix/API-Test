@@ -1,3 +1,9 @@
 body {
 	background-color: black;
+    color:white
+}
+
+#tabla{
+    margin:auto;
+    text-align: center;
 }

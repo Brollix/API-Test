@@ -5,6 +5,8 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city_name}&uni
 
 let periods = [];
 
+const tabla = document.getElementById('tabla');
+
 get_temperature(url);
 
 async function get_temperature(url) {
@@ -15,7 +17,20 @@ async function get_temperature(url) {
 		periods.push(period);
 	}
 	for (let i = 0; i < periods.length; i++) {
-		console.log(new Date(periods[i].dt * 1000));
-		console.log(periods[i].main.temp);
+		// console.log(new Date(periods[i].dt * 1000));
+		// console.log(periods[i].main.temp);
+		let div_info = document.createElement('tr')
+		div_info.className = 'info'
+
+		let dia = document.createElement('td')
+		dia.innerHTML = new Date(periods[i].dt * 1000);
+
+		let temperatura = document.createElement('td')
+		temperatura.innerHTML = periods[i].main.temp + ' °C'
+
+		div_info.appendChild(dia)
+		div_info.appendChild(temperatura)
+
+		tabla.appendChild(div_info)
 	}
 }
