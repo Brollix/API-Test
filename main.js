@@ -27,7 +27,7 @@ if ('geolocation' in navigator) {
 
 			let locacion = document.getElementById('locacion');
 
-			locacion.innerHTML = data.city.name
+			locacion.innerHTML = 'Locacion: ' + data.city.name
 
 			for (let period of data.list) {
 				periods.push(period);
