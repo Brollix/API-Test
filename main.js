@@ -8,7 +8,7 @@ const tabla = document.getElementById('tabla');
 if ('geolocation' in navigator) {
 	navigator.geolocation.getCurrentPosition(position => {
 		lat = position.coords.latitude;
-		lon = position.coords.longitude;		
+		lon = position.coords.longitude;
 
 		let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${api_key}`;
 
@@ -25,7 +25,9 @@ if ('geolocation' in navigator) {
 			const response = await fetch(url);
 			const data = await response.json();
 
-			console.log(url);
+			let locacion = document.getElementById('locacion');
+
+			locacion.innerHTML = data.city.name
 
 			for (let period of data.list) {
 				periods.push(period);
