@@ -1,23 +1,22 @@
 let api_key = '23e5c3a9a64c8efd5db1881b5e59251b';
-let lat, lon;
 let periods = [];
 
-let url = `http://127.0.0.1:5500/api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${api_key}`;
+let lat, lon;
 
 const tabla = document.getElementById('tabla');
 
 if ('geolocation' in navigator) {
-	navigator.geolocation.getCurrentPosition((position) => {
+	navigator.geolocation.getCurrentPosition(position => {
 		lat = position.coords.latitude;
-		lon = position.coords.longitude;
+		lon = position.coords.longitude;		
+
+		let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${api_key}`;
 
 		get_temperature(url);
 
 		async function get_temperature(url) {
 			const response = await fetch(url);
 			const data = await response.json();
-
-			console.log(lat, lon);
 
 			for (let period of data.list) {
 				periods.push(period);
