@@ -25,6 +25,8 @@ if ('geolocation' in navigator) {
 			const response = await fetch(url);
 			const data = await response.json();
 
+			console.log(url);
+
 			let locacion = document.getElementById('locacion');
 
 			locacion.innerHTML = 'Locacion: ' + data.city.name
